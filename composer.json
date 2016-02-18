@@ -1,0 +1,14 @@
+{
+  "description": "Web site for washing machines service company",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Denis Beliaev",
+      "email": "cimmwolf@gmail.com"
+    }
+  ],
+  "require": {
+    "phpmailer/phpmailer": "^5.2",
+    "cimmwolf/utilities": "^1.0"
+  }
+}
