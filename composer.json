@@ -7,8 +7,25 @@
       "email": "cimmwolf@gmail.com"
     }
   ],
+  "repositories": [
+    {
+      "type": "package",
+      "package": {
+        "name": "emuravjev/mdash",
+        "version": "dev-master",
+        "dist": {
+          "url": "https://github.com/emuravjev/mdash/archive/master.zip",
+          "type": "zip"
+        },
+        "autoload": {
+          "classmap": ["src-php/EMT.php"]
+        }
+      }
+    }
+  ],
   "require": {
-    "phpmailer/phpmailer": "^5.2",
-    "cimmwolf/utilities": "^1.0"
+    "cimmwolf/utilities": "^1.0",
+    "emuravjev/mdash": "dev-master",
+    "phpmailer/phpmailer": "^5.2"
   }
 }
