@@ -21,7 +21,7 @@ gulp.task('scripts', function () {
 gulp.task('css', function () {
     return gulp.src(['src/sass/*.sass'])
         .pipe(sass({includePaths:['bower_components/bootstrap-sass/assets/stylesheets']}).on('error', sass.logError))
-        .pipe(postcss([autoprefixer({browsers: ['last 3 versions'], cascade: false}), require('postcss-flexibility')]))
+        .pipe(postcss([require('postcss-flexibility'), autoprefixer({browsers: ['last 3 versions'], cascade: false})]))
         .pipe(gulp.dest('dist/css'));
 });
 

@@ -1,11 +1,10 @@
 {
-  "name": "Website",
+  "name": "website",
   "description": "",
   "authors": [
-    "Denis Beliaev"
+    "Denis Beliaev <cimmwolf@gmail.com>"
   ],
-  "moduleType": [],
-  "homepage": "",
+  "license": "UNLICENSED",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -13,8 +12,9 @@
     "test",
     "tests"
   ],
-  "devDependencies": {
+  "dependencies": {
     "bootstrap-sass": "^3.3.6",
+    "flexibility": "^1.0.6",
     "gsap": "^1.18.2",
     "scrollmagic": "ScrollMagic#^2.0.5"
   }
