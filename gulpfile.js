@@ -10,7 +10,14 @@ var imagemin = require("gulp-imagemin");
 var newer = require('gulp-newer');
 var php2html = require('gulp-php2html');
 
-gulp.task('default', ['scripts', 'css', 'images', 'fonts', 'html']);
+gulp.task('default', ['scripts', 'css', 'images', 'fonts', 'html'], function() {
+    gulp.src('dist/js/*.js')
+        .pipe(uglify())
+        .pipe(gulp.dest('js/'));
+    gulp.src('dist/css/*.css')
+        .pipe(cssnano())
+        .pipe(gulp.dest('dist/css'));
+});
 
 gulp.task('scripts', function () {
     return gulp.src('src/coffee/*.coffee')
