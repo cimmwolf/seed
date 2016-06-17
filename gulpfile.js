@@ -8,6 +8,7 @@ var postcss = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
 var imagemin = require("gulp-imagemin");
 var newer = require('gulp-newer');
+var php2html = require('gulp-php2html');
 
 gulp.task('default', ['scripts', 'css', 'images', 'fonts', 'html']);
 
@@ -25,19 +26,19 @@ gulp.task('css', function () {
         .pipe(gulp.dest('dist/css'));
 });
 
-gulp.task('html', function (cb) {
-    var exec = require('child_process').exec;
-    exec('C:/php/php.exe index.php > index.html', function (err, stdout, stderr) {
-        console.log(stdout);
-        console.log(stderr);
-        cb(err);
-    });
+gulp.task('html', function () {
+    return gulp.src(['src/index.php'])
+        .pipe(php2html())
+        .pipe(gulp.dest('./'));
 });
 
 gulp.task('images', function () {
     return gulp.src('src/img/**/*')
         .pipe(newer('dist/img'))
-        .pipe(imagemin())
+        .pipe(imagemin({
+            progressive: true,
+            use: [require('imagemin-jpegoptim')({max: 90})]
+        }))
         .pipe(gulp.dest('dist/img'));
 });
 
