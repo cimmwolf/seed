@@ -1,6 +1,8 @@
 {
-  "name": "Website",
+  "name": "website",
   "author": "Denis Beliaev",
+  "license": "UNLICENSED",
+  "description": "Website",
   "devDependencies": {
     "autoprefixer": "^6.3.1",
     "gulp": "^3.9.0",
