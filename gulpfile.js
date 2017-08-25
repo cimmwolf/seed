@@ -7,12 +7,13 @@ var autoprefixer = require('autoprefixer');
 var imageMin = require("gulp-imagemin");
 var newer = require('gulp-newer');
 var php2html = require('gulp-php2html');
-var polyClean = require('polyclean');
 var cache = require('gulp-cached');
 var flexibility = require('postcss-flexibility');
 var cssNano = require('cssnano');
+
+//Components
 var postCssHtml = require('gulp-html-postcss');
-var removeHtmlComments = require('gulp-remove-html-comments');
+var htmlMin = require('gulp-htmlmin');
 
 gulp.task('default', ['components', 'coffee', 'css', 'images', 'fonts', 'html'], function () {
     gulp.src('dist/js/*.js')
@@ -35,15 +36,22 @@ gulp.task('default', ['components', 'coffee', 'css', 'images', 'fonts', 'html'],
         'bower_components/polymer/*.html'
     ], {base: 'bower_components'})
         .pipe(cache('components'))
-        .pipe(removeHtmlComments())
-        .pipe(polyClean.cleanCss())
-        .pipe(polyClean.leftAlignJs())
-        .pipe(polyClean.uglifyJs())
+        .pipe(htmlMin({
+            removeComments: true,
+            preventAttributesEscaping: true,
+            collapseWhitespace: true,
+            minifyJS: true,
+            minifyCSS: true
+        }))
         .pipe(gulp.dest('bower_components'));
     return gulp.src('dist/components/*-*.html')
-        .pipe(removeHtmlComments())
-        .pipe(polyClean.leftAlignJs())
-        .pipe(polyClean.uglifyJs())
+        .pipe(htmlMin({
+            removeComments: true,
+            preventAttributesEscaping: true,
+            collapseBooleanAttributes: true,
+            collapseWhitespace: true,
+            minifyJS: true
+        }))
         .pipe(postCssHtml([
             flexibility,
             autoprefixer,
