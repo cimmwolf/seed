@@ -20,8 +20,6 @@ use DenisBeliaev\Typograph;
     <![endif]-->
     <script src="/bower_components/webcomponentsjs/webcomponents.min.js"></script>
     <script src="/bower_components/flexibility/dist/flexibility.js"></script>
-
-    <link rel="import" href="/dist/components/bootstrap.html">
 </head>
 <body>
 
