@@ -1,3 +1,8 @@
+<?php
+require_once __DIR__ . '/../vendor/autoload.php';
+use DenisBeliaev\Typograph;
+
+?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -16,7 +21,7 @@
     <script src="/bower_components/webcomponentsjs/webcomponents.min.js"></script>
     <script src="/bower_components/flexibility/dist/flexibility.js"></script>
 
-    <link rel="import" href="/dist/components/bootstrap.html" async>
+    <link rel="import" href="/dist/components/bootstrap.html">
 </head>
 <body>
 
