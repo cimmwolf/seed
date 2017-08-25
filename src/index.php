@@ -18,7 +18,18 @@ use DenisBeliaev\Typograph;
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script src="/bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <script>
+        (function () {
+            if ('registerElement' in document
+                && 'import' in document.createElement('link')
+                && 'content' in document.createElement('template')) {
+                // platform is good!
+            } else {
+                // polyfill the platform!
+                document.write('<script src="/bower_components/webcomponentsjs/webcomponents-lite.min.js"><\/script>');
+            }
+        })();
+    </script>
     <script src="/bower_components/flexibility/dist/flexibility.js"></script>
 </head>
 <body>
