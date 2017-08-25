@@ -21,7 +21,7 @@ gulp.task('default', ['components', 'coffee', 'css', 'images', 'fonts', 'html'],
     gulp.src('dist/css/*.css')
         .pipe(postCss([
             flexibility,
-            autoprefixer({browsers: ['> 1%', 'last 3 version'], cascade: false}),
+            autoprefixer,
             cssNano({safe: true})
         ]))
         .pipe(gulp.dest('dist/css'));
@@ -46,7 +46,7 @@ gulp.task('default', ['components', 'coffee', 'css', 'images', 'fonts', 'html'],
         .pipe(polyClean.uglifyJs())
         .pipe(postCssHtml([
             flexibility,
-            autoprefixer({browsers: ['> 1%', 'last 3 version'], cascade: false}),
+            autoprefixer,
             cssNano({safe: true})
         ]))
         .pipe(gulp.dest('dist/components'));
