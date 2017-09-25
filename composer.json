@@ -25,6 +25,7 @@
   ],
   "require": {
     "cimmwolf/utilities": "^2.0",
-    "emuravjev/mdash": "dev-master"
+    "emuravjev/mdash": "dev-master",
+    "ext-simplexml": "*"
   }
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d4a396eca0ae70b4702169a56844b7e9",
+    "content-hash": "7278346ef6c49d0a7088a3c882c47de2",
     "packages": [
         {
             "name": "cimmwolf/utilities",
@@ -70,6 +70,8 @@
     },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "ext-simplexml": "*"
+    },
     "platform-dev": []
 }
