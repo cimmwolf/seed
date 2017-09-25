@@ -1,6 +1,7 @@
 <?php
-require_once __DIR__ . '/../vendor/autoload.php';
-use DenisBeliaev\Typograph;
+require_once __DIR__ . '/../../config.php';
+
+use DenisBeliaev\AdaptiveImg;
 
 ?>
 <!DOCTYPE html>
@@ -30,7 +31,8 @@ use DenisBeliaev\Typograph;
             }
         })();
     </script>
-    <script src="/bower_components/flexibility/dist/flexibility.js"></script>
+    <script src="/bower_components/picturefill/dist/picturefill.min.js" async></script>
+    <script src="/bower_components/flexibility/dist/flexibility.js" async></script>
 </head>
 <body>
 

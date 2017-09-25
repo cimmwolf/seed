@@ -72,10 +72,22 @@ gulp.task('css', function () {
         .pipe(gulp.dest('dist/css'));
 });
 
-gulp.task('html', function () {
-    return gulp.src(['src/index.php'])
-        .pipe(php2html())
-        .pipe(gulp.dest('./'));
+gulp.task('html', ['render-html'], function (cb) {
+    var exec = require('child_process').exec;
+    return exec('php typograph.php', function (err, stdout, stderr) {
+        console.log(stdout);
+        console.log(stderr);
+        cb(err);
+    });
+});
+
+gulp.task('render-html', ['images'], function () {
+    return gulp.src(['src/pages/**/*.php'])
+        .pipe(php2html().on('error', function (err) {
+            console.log('%s', err);
+            process.exit(1);
+        }))
+        .pipe(gulp.dest('dist/pages'));
 });
 
 gulp.task('images', function () {
