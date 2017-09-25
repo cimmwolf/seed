@@ -25,7 +25,6 @@
   ],
   "require": {
     "cimmwolf/utilities": "^2.0",
-    "emuravjev/mdash": "dev-master",
-    "phpmailer/phpmailer": "^5.2"
+    "emuravjev/mdash": "dev-master"
   }
 }
