@@ -94,7 +94,9 @@ gulp.task('images', function () {
     return gulp.src('src/img/**/*')
         .pipe(newer('dist/img'))
         .pipe(imageMin([
-            require('imagemin-jpegoptim')({max: 90}),
+            require('imagemin-jpegoptim')({max: 88})
+        ]))
+        .pipe(imageMin([
             imageMin.gifsicle(),
             imageMin.jpegtran({progressive: true}),
             imageMin.optipng(),
