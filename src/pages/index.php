@@ -1,8 +1,5 @@
 <?php
 require_once __DIR__ . '/../../config.php';
-
-use DenisBeliaev\AdaptiveImg;
-
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -11,28 +8,36 @@ use DenisBeliaev\AdaptiveImg;
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="/dist/css/style.css" rel="stylesheet">
-
-    <title>Site Template</title>
-
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
     <script>
-        (function () {
+        (function() {
             if ('registerElement' in document
                 && 'import' in document.createElement('link')
                 && 'content' in document.createElement('template')) {
                 // platform is good!
-            } else {
-                // polyfill the platform!
+            } else
                 document.write('<script src="/bower_components/webcomponentsjs/webcomponents-lite.min.js"><\/script>');
-            }
+
+            if (!('scrollBehavior' in document.documentElement.style))
+                document.write('<script src="/node_modules/smoothscroll-polyfill/dist/smoothscroll.min.js"><\/script>');
+
+            if (!window.HTMLPictureElement)
+                document.write('<script src="/node_modules/picturefill/dist/picturefill.min.js" async><\/script>');
+
+            var features = [];
+            if (!('remove' in Element.prototype))
+                features.push('Element.prototype.remove');
+
+            if (!('IntersectionObserver' in window))
+                features.push('IntersectionObserver');
+
+            if (features.length > 0)
+                document.write('<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=' + features.join() + '"><\/script>')
         })();
     </script>
-    <script src="/bower_components/picturefill/dist/picturefill.min.js" async></script>
-    <script src="/bower_components/flexibility/dist/flexibility.js" async></script>
+
+    <link href="/dist/css/style.css" rel="stylesheet">
+
+    <title>Site Template</title>
 </head>
 <body>
 

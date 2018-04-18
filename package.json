@@ -5,20 +5,20 @@
   "description": "Website",
   "devDependencies": {
     "autoprefixer": "^7.1.2",
+    "bootstrap-sass": "^3.3.7",
     "cssnano": "^3.8.0",
     "gulp": "^3.9.0",
-    "gulp-cached": "^1.1.0",
-    "gulp-coffee": "^2.3.1",
     "gulp-html-postcss": "^7.0.1",
     "gulp-htmlmin": "^3.0.0",
     "gulp-imagemin": "^3.0.0",
-    "gulp-newer": "^1.1.0",
     "gulp-php2html": "^0.3.2",
     "gulp-postcss": "^7.0.0",
     "gulp-sass": "^3.0",
-    "gulp-uglify": "^3.0.0",
-    "imagemin-jpegoptim": "^5.0.0",
-    "postcss-flexibility": "^2.0.0"
+    "imagemin-jpegoptim": "^5.0.0"
+  },
+  "scripts": {
+    "install-packages": "composer install && bower install && yarn",
+    "publish": "yarn run install-packages && gulp publish && yarn --production"
   },
   "browserslist": [
     "> 1% in RU",
@@ -27,5 +27,9 @@
     "Safari >= 8",
     "Android >= 4",
     "not Explorer < 11"
-  ]
+  ],
+  "dependencies": {
+    "picturefill": "^3.0.2",
+    "smoothscroll-polyfill": "^0.4.3"
+  }
 }
