@@ -1,10 +1,26 @@
 <?php
-require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 use DenisBeliaev\Typograph;
 
+define('ROOT', __DIR__);
+define('PAGES', __DIR__ . '/src/pages');
+
+if (strpos($_SERVER['REQUEST_URI'], '.php') !== false) {
+    $urlPath = str_replace(['/src/pages/', '.php'], ['/', ''], $_SERVER['REQUEST_URI']);
+    define('URL_PATH', $urlPath);
+} else
+    define('URL_PATH', $_SERVER['REQUEST_URI']);
+
+
+if ($_SERVER['SERVER_SOFTWARE'] == 'php-cgi') {
+    define('REQUEST_URI', str_replace(['/src/pages', '.php'], '', $_SERVER['REQUEST_URI']));
+} else {
+    define('REQUEST_URI', $_SERVER['REQUEST_URI']);
+}
+
 $matches = [];
-if (preg_match('#^(.*?)@(\d+|-)x(\d+|-)\.(gif|jpe?g|png)$#', $_SERVER['REQUEST_URI'], $matches)) {
+if (preg_match('#^(.*?)@(\d+|-)x(\d+|-)\.(gif|jpe?g|png)$#', REQUEST_URI, $matches)) {
     if (($newW = $matches[2]) == '-')
         $newW = -1;
     if (($newH = $matches[3]) == '-')
@@ -38,16 +54,19 @@ if (preg_match('#^(.*?)@(\d+|-)x(\d+|-)\.(gif|jpe?g|png)$#', $_SERVER['REQUEST_U
         imagejpeg($image);
     }
     imagedestroy($image);
-} elseif ($_SERVER['REQUEST_URI'] == '/') {
+} elseif (REQUEST_URI == '/') {
     buildSiteMap();
     display(__DIR__ . '/src/pages/index.php');
 } else {
-    $uri = trim($_SERVER['REQUEST_URI'], "/");
+    $uri = trim(REQUEST_URI, "/");
     if (file_exists($file = __DIR__ . '/src/pages/' . $uri . '.php')) {
         buildSiteMap();
         display($file);
-    } else
+    } elseif (!file_exists(__DIR__ . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH))) {
+        display(__DIR__ . '/src/pages/' . '/404.php');
+    } else {
         return false;
+    }
 }
 
 function display($file)
@@ -56,9 +75,25 @@ function display($file)
     require $file;
     $content = ob_get_contents();
     ob_end_clean();
+
+    preg_match_all('~<(?:img|source)[^<>]+srcset=[\'"]{2}[^<>]*>~miu', $content, $matches);
+    foreach ($matches[0] as $match) {
+        try {
+            $adaptiveImg = \DenisBeliaev\AdaptiveImg::adapt($match);
+            $content = str_replace($match, $adaptiveImg, $content);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
     if (preg_match('~^(.+?)(<body.*?>.+?<\/body>)(.+)$~iums', $content, $parts)) {
         unset($parts[0]);
         $parts[2] = Typograph::string($parts[2]);
+        $content = implode('', $parts);
+    }
+    if (preg_match('~^(.+?)(<tile-justified.*?>.+?</tile-justified>)(.+)$~ius', $content, $parts)) {
+        unset($parts[0]);
+        $parts[2] = str_replace('src=', 'data-src=', $parts[2]);
         $content = implode('', $parts);
     }
     echo $content;
