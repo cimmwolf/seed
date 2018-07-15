@@ -1,0 +1,29 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "google"
+  ],
+  "env": {
+    "browser": true
+  },
+  "plugins": [
+    "html"
+  ],
+  "rules": {
+    "brace-style": "off",
+    "new-cap": [
+      "error",
+      {
+        "capIsNewExceptions": [
+          "Polymer"
+        ]
+      }
+    ],
+    "no-var": "off",
+    "require-jsdoc": "off",
+    "comma-dangle": "off"
+  },
+  "globals": {
+    "Polymer": true
+  }
+}
