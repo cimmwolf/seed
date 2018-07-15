@@ -20,8 +20,8 @@
     "imagemin-jpegoptim": "^5.0.0"
   },
   "scripts": {
-    "install-packages": "composer install && bower install && yarn",
-    "publish": "yarn run install-packages && gulp publish && yarn --production"
+    "install": "composer install && bower install --allow-root",
+    "publish": "yarn && gulp publish && yarn --production"
   },
   "browserslist": [
     "> 1% in RU",
