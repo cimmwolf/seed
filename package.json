@@ -11,8 +11,6 @@
     "eslint-config-google": "^0.9.1",
     "eslint-plugin-html": "^4.0.5",
     "gulp": "^3.9.0",
-    "gulp-html-postcss": "^7.0.1",
-    "gulp-htmlmin": "^3.0.0",
     "gulp-imagemin": "^3.0.0",
     "gulp-php2html": "^0.3.2",
     "gulp-postcss": "^7.0.0",
@@ -21,7 +19,7 @@
   },
   "scripts": {
     "install": "composer install && bower install --allow-root",
-    "publish": "yarn && gulp publish && yarn --production"
+    "publish": "yarn && gulp publish && polymer build"
   },
   "browserslist": [
     "> 1% in RU",

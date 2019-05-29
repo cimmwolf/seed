@@ -1,0 +1,45 @@
+{
+  "entrypoint": "dist/pages/index.html",
+  "shell": "",
+  "sources": [
+    "components/*.html",
+    "dist/**/*",
+    "bower_components/**/*.html",
+    "favicon.ico"
+  ],
+  "lint": {
+    "rules": [
+      "polymer-2"
+    ]
+  },
+  "builds": [
+    {
+      "name": "es5",
+      "bundle": false,
+      "js": {
+        "compile": true,
+        "minify": true
+      },
+      "css": {
+        "minify": true
+      },
+      "html": {
+        "minify": true
+      }
+    },
+    {
+      "name": "es6",
+      "bundle": false,
+      "js": {
+        "compile": false,
+        "minify": true
+      },
+      "css": {
+        "minify": true
+      },
+      "html": {
+        "minify": true
+      }
+    }
+  ]
+}

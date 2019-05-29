@@ -6,31 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <script>
-        (function() {
-            if ('registerElement' in document
-                && 'import' in document.createElement('link')
-                && 'content' in document.createElement('template')) {
-                // platform is good!
-            } else
-                document.write('<script src="/bower_components/webcomponentsjs/webcomponents-lite.min.js"><\/script>');
-
-            if (!('scrollBehavior' in document.documentElement.style))
-                document.write('<script src="/node_modules/smoothscroll-polyfill/dist/smoothscroll.min.js"><\/script>');
-
-            if (!window.HTMLPictureElement)
-                document.write('<script src="/node_modules/picturefill/dist/picturefill.min.js" async><\/script>');
-
-            var features = [];
-            if (!('remove' in Element.prototype))
+        (function () {
+            if (!('scrollBehavior' in document.documentElement.style)) {
+                let script = document.createElement('script');
+                script.src = '/node_modules/smoothscroll-polyfill/dist/smoothscroll.min.js';
+                document.write(script.outerHTML);
+            }
+            if (!window.HTMLPictureElement) {
+                let script = document.createElement('script');
+                script.src = '/node_modules/picturefill/dist/picturefill.min.js';
+                document.write(script.outerHTML);
+            }
+            let features = [];
+            if (!('remove' in Element.prototype)) {
                 features.push('Element.prototype.remove');
-
-            if (!('IntersectionObserver' in window))
+            }
+            if (!('IntersectionObserver' in window)) {
                 features.push('IntersectionObserver');
-
-            if (features.length > 0)
-                document.write('<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=' + features.join() + '"><\/script>')
+            }
+            if (features.length > 0) {
+                let script = document.createElement('script');
+                script.src = 'https://cdn.polyfill.io/v2/polyfill.min.js?features=' + features.join();
+                document.write(script.outerHTML);
+            }
         })();
     </script>
+    <script src="/bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+
 
     <link href="/dist/css/style.css" rel="stylesheet">
 
