@@ -5,8 +5,9 @@ var autoprefixer = require('autoprefixer');
 var imageMin = require('gulp-imagemin');
 var php2html = require('gulp-php2html');
 var cssNano = require('cssnano');
+var rimraf = require('rimraf');
 
-gulp.task('default', ['improve-css', 'html']);
+gulp.task('default', ['css']);
 
 gulp.task('improve-css', ['css'], function() {
     return gulp.src('dist/css/*.css')
@@ -23,19 +24,11 @@ gulp.task('css', function() {
         .pipe(gulp.dest('dist/css'));
 });
 
-gulp.task('html', ['render-html'], function(cb) {
-    var exec = require('child_process').exec;
-    return exec('php post-process.php', function(err, stdout, stderr) {
-        console.log(stdout);
-        console.log(stderr);
-        cb(err);
-    });
-});
-
-gulp.task('render-html', ['images'], function() {
+gulp.task('html', function(cb) {
     /* global process */
-    return gulp.src(['src/pages/**/*.php'])
-        .pipe(php2html().on('error', function(err) {
+    rimraf.sync('dist/pages');
+    return gulp.src(['src/pages/**/*.php', '!src/pages/**/_*.php'])
+        .pipe(php2html({router: 'router.php'}).on('error', function(err) {
             console.log('%s', err);
             process.exit(1);
         }))
@@ -56,4 +49,4 @@ gulp.task('images', function() {
         .pipe(gulp.dest('img'));
 });
 
-gulp.task('publish', ['default', 'images']);
+gulp.task('publish', ['default', 'images', 'html', 'improve-css']);
