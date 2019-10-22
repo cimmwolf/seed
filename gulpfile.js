@@ -20,11 +20,11 @@ gulp.task('improve-css', ['css'], function() {
 
 gulp.task('css', function() {
     return gulp.src('src/sass/*.sass')
-        .pipe(sass({includePaths: ['node_modules/bootstrap-sass/assets/stylesheets']}).on('error', sass.logError))
+        .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest('dist/css'));
 });
 
-gulp.task('html', function(cb) {
+gulp.task('html', function() {
     /* global process */
     rimraf.sync('dist/pages');
     return gulp.src(['src/pages/**/*.php', '!src/pages/**/_*.php'])
