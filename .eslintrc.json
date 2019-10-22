@@ -3,8 +3,13 @@
     "eslint:recommended",
     "google"
   ],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
   "env": {
-    "browser": true
+    "browser": true,
+    "es6": true
   },
   "plugins": [
     "html"
@@ -20,10 +25,6 @@
       }
     ],
     "no-var": "off",
-    "require-jsdoc": "off",
-    "comma-dangle": "off"
-  },
-  "globals": {
-    "Polymer": true
+    "require-jsdoc": "off"
   }
 }

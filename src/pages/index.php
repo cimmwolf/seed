@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <script>
-        (function () {
+        (function() {
             if (!('scrollBehavior' in document.documentElement.style)) {
                 let script = document.createElement('script');
                 script.src = '/node_modules/smoothscroll-polyfill/dist/smoothscroll.min.js';
@@ -31,8 +31,7 @@
             }
         })();
     </script>
-    <script src="/bower_components/webcomponentsjs/webcomponents-loader.js"></script>
-
+    <script src="/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
 
     <link href="/dist/css/style.css" rel="stylesheet">
 

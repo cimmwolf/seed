@@ -1,15 +1,14 @@
 {
-  "entrypoint": "dist/pages/index.html",
-  "shell": "",
-  "sources": [
-    "components/*.html",
-    "dist/**/*",
-    "bower_components/**/*.html",
-    "favicon.ico"
+  "sources": [],
+  "extraDependencies": [
+    "robots.txt",
+    "node_modules/@webcomponents/webcomponentsjs/*.js",
+    "node_modules/@webcomponents/webcomponentsjs/bundles/*.js",
+    "!node_modules/@webcomponents/webcomponentsjs/gulpfile.js"
   ],
   "lint": {
     "rules": [
-      "polymer-2"
+      "polymer-3"
     ]
   },
   "builds": [
@@ -18,7 +17,8 @@
       "bundle": false,
       "js": {
         "compile": true,
-        "minify": true
+        "minify": true,
+        "transformModulesToAmd": true
       },
       "css": {
         "minify": true

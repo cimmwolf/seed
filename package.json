@@ -12,14 +12,16 @@
     "eslint-plugin-html": "^4.0.5",
     "gulp": "^3.9.0",
     "gulp-imagemin": "^3.0.0",
+    "gulp-inject-string": "^1.1.2",
     "gulp-php2html": "^0.3.2",
     "gulp-postcss": "^7.0.0",
     "gulp-sass": "^3.0",
-    "imagemin-jpegoptim": "^5.0.0"
+    "imagemin-jpegoptim": "^5.0.0",
+    "rimraf": "latest"
   },
   "scripts": {
-    "install": "composer install && bower install --allow-root",
-    "publish": "yarn && gulp publish && polymer build"
+    "install": "composer install",
+    "build-in-pipeline": "yarn && gulp publish && polymer build && gulp inject-babel"
   },
   "browserslist": [
     "> 1% in RU",
@@ -30,6 +32,8 @@
     "not Explorer < 11"
   ],
   "dependencies": {
+    "@polymer/polymer": "^3.0",
+    "@webcomponents/webcomponentsjs": "^2.0",
     "picturefill": "^3.0.2",
     "smoothscroll-polyfill": "^0.4.3"
   }
