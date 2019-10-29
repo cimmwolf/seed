@@ -21,7 +21,8 @@
   },
   "scripts": {
     "install": "composer install",
-    "build-in-pipeline": "yarn && gulp publish && polymer build && gulp inject-babel"
+    "build-in-pipeline": "yarn && gulp publish && polymer build && gulp inject-babel",
+    "serve": "php -S 127.0.0.1:8000 router.php && gulp serve"
   },
   "browserslist": [
     "> 1% in RU",
@@ -34,6 +35,8 @@
   "dependencies": {
     "@polymer/polymer": "^3.0",
     "@webcomponents/webcomponentsjs": "^2.0",
+    "browser-sync": "^2.26.7",
+    "gulp-connect-php": "^1.0.3",
     "picturefill": "^3.0.2",
     "smoothscroll-polyfill": "^0.4.3"
   }
