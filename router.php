@@ -36,10 +36,8 @@ if (preg_match('#^(.*?)@(\d+|-)x(\d+|-)\.(gif|jpe?g|png)$#', REQUEST_URI, $match
         case 'gif':
             header('Content-Type: image/gif');
             break;
-        case 'jpg':
-            header('Content-Type: image/jpeg');
-            break;
         case 'jpeg':
+        case 'jpg':
             header('Content-Type: image/jpeg');
             break;
         case 'png':
@@ -68,12 +66,10 @@ if (preg_match('#^(.*?)@(\d+|-)x(\d+|-)\.(gif|jpe?g|png)$#', REQUEST_URI, $match
         ['/node_modules/@polymer/', '/node_modules/@webcomponents/', '/node_modules/@vistro/'],
         $content);
 } elseif (REQUEST_URI == '/') {
-    buildSiteMap();
     display(__DIR__ . '/src/pages/index.php');
 } else {
     $uri = trim(REQUEST_URI, "/");
     if (file_exists($file = __DIR__ . '/src/pages/' . $uri . '.php')) {
-        buildSiteMap();
         display($file);
     } elseif (!file_exists(__DIR__ . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH))) {
         display(__DIR__ . '/src/pages/' . '/404.php');
@@ -110,33 +106,4 @@ function display($file)
         $content = implode('', $parts);
     }
     echo $content;
-}
-
-function recursiveRemoveDirectory($directory)
-{
-    foreach (glob("{$directory}/*") as $file) {
-        if (is_dir($file)) {
-            recursiveRemoveDirectory($file);
-        } else {
-            unlink($file);
-        }
-    }
-    rmdir($directory);
-}
-
-function buildSiteMap()
-{
-    $path = __DIR__ . '/dist/sitemap';
-
-    if (is_dir($path)) {
-        recursiveRemoveDirectory($path);
-    }
-
-    $sitemap = new SimpleXMLElement(__DIR__ . '/sitemap.xml', 0, true);
-    foreach ($sitemap as $url) {
-        $dir = $path . parse_url($url->loc, PHP_URL_PATH);
-        if (!file_exists($dir)) {
-            mkdir($dir, 0777, true);
-        }
-    }
 }
