@@ -9,7 +9,6 @@ const php2html = require('gulp-php2html');
 const cssNano = require('cssnano');
 const rimraf = require('rimraf');
 const inject = require('gulp-inject-string');
-const browserSync = require('browser-sync').create();
 const fs = require('fs');
 
 function walk(dir) {
@@ -39,8 +38,7 @@ gulp.task('improve-css', ['css'], () => {
 gulp.task('css', () => {
   return gulp.src('src/sass/*.sass')
       .pipe(sass().on('error', sass.logError))
-      .pipe(gulp.dest('dist/css'))
-      .pipe(browserSync.stream());
+      .pipe(gulp.dest('dist/css'));
 });
 
 gulp.task('html', () => {
@@ -94,4 +92,8 @@ gulp.task('inject-babel', () => {
   return gulp.src('build/es5/dist/pages/**/*.html')
       .pipe(inject.after('<head>', script))
       .pipe(gulp.dest('build/es5/dist/pages'));
+});
+
+gulp.task('watch', ['css'], function() {
+  gulp.watch('src/sass/**/*.sass', ['css']);
 });

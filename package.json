@@ -24,7 +24,7 @@
   "scripts": {
     "install": "composer install",
     "build-in-pipeline": "yarn && gulp publish && polymer build && gulp inject-babel",
-    "serve": "concurrently \"php -S localhost:8080 router.php\" \"browser-sync 'http://localhost:8080' ./ -w --port 8000\""
+    "serve": "concurrently \"php -S localhost:8080 router.php\" \"browser-sync 'http://localhost:8080' ./ -w --port 8000\" \"gulp watch\""
   },
   "browserslist": [
     "> 1% in RU",
