@@ -18,12 +18,15 @@
           "type": "zip"
         },
         "autoload": {
-          "classmap": ["src-php/EMT.php"]
+          "classmap": [
+            "src-php/EMT.php"
+          ]
         }
       }
     }
   ],
   "require": {
+    "php": ">=7.0",
     "cimmwolf/utilities": "^3.0.2",
     "cimmwolf/mdash": "dev-master",
     "ext-gd": "*"
