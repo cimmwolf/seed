@@ -10,7 +10,6 @@ const cssNano = require('cssnano');
 const rimraf = require('rimraf');
 const inject = require('gulp-inject-string');
 const browserSync = require('browser-sync').create();
-const connect = require('gulp-connect-php');
 const fs = require('fs');
 
 function walk(dir) {
@@ -27,20 +26,6 @@ function walk(dir) {
   });
   return results;
 }
-
-gulp.task('serve', ['css'], function() {
-  connect.server({
-    router: 'router.php',
-  }, function() {
-    browserSync.init({
-      proxy: '127.0.0.1:8000',
-    });
-  });
-
-  gulp.watch('src/sass/*.sass', ['css']);
-  gulp.watch('dist/*.php').on('change', browserSync.reload);
-  gulp.watch('src/pages/*.php').on('change', browserSync.reload);
-});
 
 gulp.task('improve-css', ['css'], () => {
   return gulp.src('dist/css/*.css')

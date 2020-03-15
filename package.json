@@ -6,6 +6,8 @@
   "devDependencies": {
     "autoprefixer": "^7.1.2",
     "bootstrap-sass": "^3.3.7",
+    "browser-sync": "^2.26.7",
+    "concurrently": "^5.1.0",
     "cssnano": "^3.8.0",
     "eslint": "^4.0.0",
     "eslint-config-google": "^0.9.1",
@@ -22,7 +24,7 @@
   "scripts": {
     "install": "composer install",
     "build-in-pipeline": "yarn && gulp publish && polymer build && gulp inject-babel",
-    "serve": "php -S 127.0.0.1:8000 router.php && gulp serve"
+    "serve": "concurrently \"php -S localhost:8080 router.php\" \"browser-sync 'http://localhost:8080' ./ -w --port 8000\""
   },
   "browserslist": [
     "> 1% in RU",
@@ -35,8 +37,6 @@
   "dependencies": {
     "@polymer/polymer": "^3.0",
     "@webcomponents/webcomponentsjs": "^2.0",
-    "browser-sync": "^2.26.7",
-    "gulp-connect-php": "^1.0.3",
     "picturefill": "^3.0.2",
     "smoothscroll-polyfill": "^0.4.3"
   }
