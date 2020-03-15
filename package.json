@@ -19,12 +19,14 @@
     "gulp-postcss": "^8.0.0",
     "gulp-sass": "^4.0.2",
     "imagemin-jpegoptim": "^6.0.0",
-    "rimraf": "latest"
+    "rimraf": "latest",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11"
   },
   "scripts": {
     "install": "composer install",
     "build-in-pipeline": "yarn && gulp publish && polymer build && gulp inject-babel",
-    "serve": "concurrently \"php -S localhost:8080 router.php\" \"browser-sync 'http://localhost:8080' ./ -w --port 8000\" \"gulp watch\""
+    "serve": "concurrently \"php -S localhost:8080 router.php\" \"browser-sync 'http://localhost:8080' ./ -w --port 8000\" \"gulp watch\" \"webpack --watch\""
   },
   "browserslist": [
     "> 1% in RU",

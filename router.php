@@ -105,7 +105,15 @@ function display($file)
 		$content = implode('', $parts);
 	}
 
-	$content = str_replace('/src/sass/style.sass', '/dist/css/style.css', $content);
+	$content = str_replace(
+		[
+			'/src/sass/style.sass',
+			'/src/js/script.js'
+		],
+		[
+			'/dist/css/style.css',
+			'/dist/js/script.js',
+		], $content);
 
 	echo $content;
 }

@@ -12,10 +12,7 @@
 
     <title>Site Template</title>
 
-    <script type="module">
-        WebComponents.waitFor(async () => {
-        });
-    </script>
+		<script src="/src/js/script.js" defer></script>
 </head>
 <body>
 
