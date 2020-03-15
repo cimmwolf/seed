@@ -11,10 +11,10 @@
     {
       "type": "package",
       "package": {
-        "name": "emuravjev/mdash",
+        "name": "cimmwolf/mdash",
         "version": "dev-master",
         "dist": {
-          "url": "https://github.com/emuravjev/mdash/archive/master.zip",
+          "url": "https://github.com/cimmwolf/mdash/archive/master.zip",
           "type": "zip"
         },
         "autoload": {
@@ -24,9 +24,8 @@
     }
   ],
   "require": {
-    "cimmwolf/utilities": "^3.0",
-    "emuravjev/mdash": "dev-master",
-    "ext-simplexml": "*",
+    "cimmwolf/utilities": "^3.0.2",
+    "cimmwolf/mdash": "dev-master",
     "ext-gd": "*"
   }
 }
