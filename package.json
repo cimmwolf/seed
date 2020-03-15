@@ -29,11 +29,9 @@
 	},
 	"browserslist": [
 		"> 1% in RU",
-		"last 3 version",
-		"iOS >= 8",
-		"Safari >= 8",
-		"Android >= 4",
-		"not Explorer < 11"
+		"iOS >= 12",
+		"Safari >= 12",
+		"last 2 Edge versions"
 	],
 	"dependencies": {
 		"@polymer/polymer": "^3.0",
