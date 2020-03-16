@@ -34,7 +34,6 @@
 		"last 2 Edge versions"
 	],
 	"dependencies": {
-		"@polymer/polymer": "^3.0",
 		"@webcomponents/webcomponentsjs": "^2.0",
 		"picturefill": "^3.0.2",
 		"smoothscroll-polyfill": "^0.4.3"
@@ -52,21 +51,9 @@
 		"plugins": [
 			"html"
 		],
-		"rules": {
-			"brace-style": "off",
-			"new-cap": [
-				"error"
-			],
-			"no-var": "off",
-			"require-jsdoc": "off",
-			"comma-dangle": "off"
-		},
 		"parserOptions": {
 			"ecmaVersion": 6,
 			"sourceType": "module"
-		},
-		"globals": {
-			"Polymer": true
 		}
 	}
 }
