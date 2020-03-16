@@ -1,7 +1,6 @@
-index.html
-/dist/
-
 /.idea/
 /vendor/
-/bower_components/
 /node_modules/
+
+/dist/
+/build/
