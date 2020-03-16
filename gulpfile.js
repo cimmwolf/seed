@@ -40,7 +40,7 @@ gulp.task('images', () => {
 		]))
 		.pipe(imageMin([
 			imageMin.gifsicle(),
-			imageMin.jpegtran({progressive: true}),
+			imageMin.mozjpeg({progressive: true}),
 			imageMin.optipng(),
 			imageMin.svgo(),
 		]))
