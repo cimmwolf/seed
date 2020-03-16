@@ -5,8 +5,9 @@ use DenisBeliaev\Build;
 
 $build = new Build();
 
-$build->addFolder('/dist');
-$build->addFolder('/img');
-$build->addFolder('/node_modules/@webcomponents/webcomponentsjs');
+$build->addPath('/dist');
+$build->addPath('/img');
+$build->addPath('/node_modules/@webcomponents/webcomponentsjs');
+$build->addPath('/node_modules/smoothscroll-polyfill/dist/smoothscroll.min.js');
 
 $build->run();
