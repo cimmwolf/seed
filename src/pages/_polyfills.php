@@ -16,11 +16,4 @@
 		}
 	})();
 </script>
-<script src="/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js" defer></script>
-<script type="module">
-	window.WebComponents = window.WebComponents || {
-		waitFor(cb) {
-			addEventListener('WebComponentsReady', cb);
-		},
-	};
-</script>
+<script src="/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
