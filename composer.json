@@ -29,6 +29,7 @@
     "php": ">=7.0",
     "cimmwolf/utilities": "^3.1.1",
     "cimmwolf/mdash": "dev-master",
-    "ext-gd": "*"
+    "ext-gd": "*",
+    "ext-fileinfo": "*"
   }
 }

@@ -71,10 +71,12 @@ if (preg_match('#^(.*?)@(\d+|-)x(\d+|-)\.(gif|jpe?g|png)$#', REQUEST_URI, $match
     display(__DIR__ . '/src/pages/index.php');
 } else {
     $uri = trim(REQUEST_URI, "/");
-    if (file_exists($file = __DIR__ . '/src/pages/' . $uri . '.php')) {
+    if (file_exists($file = __DIR__ . '/public/' . $uri)) {
+        display($file);
+    } elseif (file_exists($file = __DIR__ . '/src/pages/' . $uri . '.php')) {
         display($file);
     } elseif (!file_exists(__DIR__ . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH))) {
-        display(__DIR__ . '/src/pages/' . '/404.php');
+        display(__DIR__ . '/src/pages/404.php');
     } else {
         return false;
     }
@@ -87,38 +89,38 @@ function display($file)
     $content = ob_get_contents();
     ob_end_clean();
 
-    preg_match_all('~<(?:img|source)[^<>]+srcset=[\'"]{2}[^<>]*>~miu', $content, $matches);
-    foreach ($matches[0] as $match) {
-        try {
-            $adaptiveImg = AdaptiveImg::adapt($match);
-            $content = str_replace($match, $adaptiveImg, $content);
-        } catch (Exception $e) {
-            echo $e->getMessage();
+    $mime = mime_content_type($file);
+
+    if ($mime == 'text/html') {
+        preg_match_all('~<(?:img|source)[^<>]+srcset=[\'"]{2}[^<>]*>~miu', $content, $matches);
+        foreach ($matches[0] as $match) {
+            try {
+                $adaptiveImg = AdaptiveImg::adapt($match);
+                $content = str_replace($match, $adaptiveImg, $content);
+            } catch (Exception $e) {
+                echo $e->getMessage();
+            }
         }
+
+        if (preg_match('~^(.+?)(<body.*?>.+?</body>)(.+)$~iums', $content, $parts)) {
+            unset($parts[0]);
+            $parts[2] = Typograph::string($parts[2]);
+            $content = implode('', $parts);
+        }
+
+        $content = str_replace(
+            [
+                '/src/sass/style.sass',
+                '/src/js/script.js'
+            ],
+            [
+                '/dist/css/style.css',
+                '/dist/js/script.js',
+            ],
+            $content
+        );
     }
 
-    if (preg_match('~^(.+?)(<body.*?>.+?</body>)(.+)$~iums', $content, $parts)) {
-        unset($parts[0]);
-        $parts[2] = Typograph::string($parts[2]);
-        $content = implode('', $parts);
-    }
-    if (preg_match('~^(.+?)(<tile-justified.*?>.+?</tile-justified>)(.+)$~ius', $content, $parts)) {
-        unset($parts[0]);
-        $parts[2] = str_replace('src=', 'data-src=', $parts[2]);
-        $content = implode('', $parts);
-    }
-
-    $content = str_replace(
-        [
-            '/src/sass/style.sass',
-            '/src/js/script.js'
-        ],
-        [
-            '/dist/css/style.css',
-            '/dist/js/script.js',
-        ],
-        $content
-    );
-
+    header("Content-Type: $mime");
     echo $content;
 }
