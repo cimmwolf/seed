@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
-const gulp = require('gulp')
+const { src, dest, series, watch } = require('gulp')
+
 const sass = require('gulp-sass')
 const postCss = require('gulp-postcss')
 const autoprefixer = require('autoprefixer')
@@ -8,33 +9,33 @@ const php2html = require('gulp-php2html')
 const cssNano = require('cssnano')
 const rimraf = require('rimraf')
 
-gulp.task('improve-css', ['css'], () => {
-  return gulp.src('dist/css/*.css')
+function improveCss () {
+  return src('dist/css/*.css')
     .pipe(postCss([
       autoprefixer,
       cssNano({ safe: true }),
     ]))
-    .pipe(gulp.dest('dist/css'))
-})
+    .pipe(dest('dist/css'))
+}
 
-gulp.task('css', () => {
-  return gulp.src('src/sass/*.sass')
+function css () {
+  return src('src/sass/*.sass')
     .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('dist/css'))
-})
+    .pipe(dest('dist/css'))
+}
 
-gulp.task('html', () => {
+function html () {
   rimraf.sync('dist/pages')
-  return gulp.src(['src/pages/**/*.php', '!src/pages/**/_*.php'])
+  return src(['src/pages/**/*.php', '!src/pages/**/_*.php'])
     .pipe(php2html({ router: 'router.php' }).on('error', function (err) {
       console.log('%s', err)
       process.exit(1)
     }))
-    .pipe(gulp.dest('dist/pages'))
-})
+    .pipe(dest('dist/pages'))
+}
 
-gulp.task('images', () => {
-  return gulp.src('img/**/*')
+function images () {
+  return src('img/**/*')
     .pipe(imageMin([
       require('imagemin-jpegoptim')({ max: 88 }),
     ]))
@@ -44,11 +45,11 @@ gulp.task('images', () => {
       imageMin.optipng(),
       imageMin.svgo(),
     ]))
-    .pipe(gulp.dest('img'))
-})
+    .pipe(dest('img'))
+}
 
-gulp.task('publish', ['images', 'html', 'improve-css'])
+exports.publish = series(images, html, css, improveCss)
 
-gulp.task('watch', ['css'], () => {
-  gulp.watch('src/sass/**/*.sass', ['css'])
-})
+exports.watch = function () {
+  watch('src/sass/**/*.sass', css)
+}
