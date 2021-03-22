@@ -43,7 +43,12 @@ function images () {
       imageMin.gifsicle(),
       imageMin.mozjpeg({ progressive: true }),
       imageMin.optipng(),
-      imageMin.svgo(),
+      imageMin.svgo({
+        plugins: [
+          { removeViewBox: false },
+          { removeDimensions: true }
+        ]
+      })
     ]))
     .pipe(dest('img'))
 }
