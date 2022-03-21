@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 const { src, dest, series, watch } = require('gulp')
 
-const sass = require('gulp-sass')
+const sass = require('gulp-sass')(require('sass'))
 const postCss = require('gulp-postcss')
 const autoprefixer = require('autoprefixer')
 const imageMin = require('gulp-imagemin')
