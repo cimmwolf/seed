@@ -22,7 +22,7 @@
   },
   "scripts": {
     "install": "composer install",
-    "build": "webpack --mode=production",
+    "build": "webpack --mode=production --no-devtool",
     "build-in-pipeline": "yarn && yarn build && gulp publish && php build.php",
     "serve": "concurrently \"php -S localhost:8080 router.php\" \"browser-sync 'http://localhost:8080' ./ -w --port 8000\" \"gulp watch\" \"webpack --watch\""
   },
