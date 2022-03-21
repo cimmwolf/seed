@@ -37,11 +37,8 @@ function html () {
 function images () {
   return src('img/**/*')
     .pipe(imageMin([
-      require('imagemin-jpegoptim')({ max: 88 }),
-    ]))
-    .pipe(imageMin([
       imageMin.gifsicle(),
-      imageMin.mozjpeg({ progressive: true }),
+      imageMin.mozjpeg({ quality: 90, progressive: true }),
       imageMin.optipng(),
       imageMin.svgo({
         plugins: [
