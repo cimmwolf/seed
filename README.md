@@ -1,9 +1,9 @@
 REQUIREMENTS
 ------------
 
-* РHP 7.0
+* РHP 8.2
 * Node 20
-* Composer 1.9
+* Composer 2
 
 
 HOW TO RUN LOCALLY

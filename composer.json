@@ -26,7 +26,7 @@
     }
   ],
   "require": {
-    "php": ">=7.0",
+    "php": ">=8.2",
     "cimmwolf/utilities": "^3.1.1",
     "cimmwolf/mdash": "dev-master",
     "ext-gd": "*",
