@@ -2,8 +2,7 @@ REQUIREMENTS
 ------------
 
 * РHP 7.0
-* Node 10.19
-* Yarn 1.22
+* Node 20
 * Composer 1.9
 
 
