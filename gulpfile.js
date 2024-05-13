@@ -5,7 +5,10 @@ import cssNano from 'cssnano'
 import postCss from 'gulp-postcss'
 import autoprefixer from 'autoprefixer'
 
-import sass from 'gulp-sass'
+import dartSass from 'sass';
+import gulpSass from 'gulp-sass';
+const sass = gulpSass(dartSass);
+
 import { rimrafSync } from 'rimraf'
 
 function improveCss () {
